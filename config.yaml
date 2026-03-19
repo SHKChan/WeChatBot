@@ -1,0 +1,16 @@
+# 机器人基础配置
+settings:
+  duration: "1min"        # 每一轮监听的时长
+  loop_interval: 2        # 轮询间隔（秒）
+  max_workers: 5          # 最大并发线程数
+
+# API 接口配置
+api:
+  news_60s:
+    url: "60s.viki.moe"
+    path: "/v2/60s?type=image"
+    method: "GET"
+
+# 监听的好友列表
+friends:
+  - "Felix"

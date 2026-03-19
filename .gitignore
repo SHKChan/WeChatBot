@@ -1,0 +1,60 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# PyInstaller
+#  Usually creates a build/ directory and a dist/ directory
+build/
+dist/
+*.egg-info/
+*.egg
+
+# virtualenv
+# It’s not recommended to add the virtual environment to the Git repository. This directory is generated and should be excluded.
+*.env
+*.venv
+
+# MyPy
+.mypy_cache/
+
+# Pytest
+.cache/
+
+# VS Code
+.vscode/
+
+# JetBrains IDEs
+.idea/
+
+# Python egg file
+*.egg
+
+# macOS specific
+.DS_Store
+
+# Windows specific
+Thumbs.db
+ehthumbs.db
+
+# Logs
+*.log
+
+# Git Clone Packages
+pywechat/
+pyweixin/
