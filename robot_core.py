@@ -24,7 +24,7 @@ def smart_reply_logic(newMessage: str, contexts: list):
     if "每日新闻" in msg:
         logger.info(f"触发 每日新闻...")
 
-        logger.info(f"获取 60s 新闻...")
+        logger.info(f"获取 每日新闻...")
         img_data = ApiService.fetch_60s_news(cfg['api']['news_60s'])
 
         logger.info(f"复制到剪贴板...")
