@@ -28,4 +28,5 @@ git clone to Local
 cd to repo
 pip install -r requirements.txt
 pip install -e .
+copy pyweixin to repo root
 ```

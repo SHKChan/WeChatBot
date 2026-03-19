@@ -1,42 +1,13 @@
 import yaml
 import time
-import comm_untils
 from logger_utils import logger
 from concurrent.futures import ThreadPoolExecutor
+from message_processor import smart_reply_logic
 from pyweixin import Navigator, AutoReply
-from api_service import ApiService
 
 # 加载配置
 with open("config.yaml", "r", encoding="utf-8") as f:
     cfg = yaml.safe_load(f)
-
-
-def smart_reply_logic(newMessage: str, contexts: list):
-    """
-    在这里扩展业务逻辑：
-    返回 bytes -> 发送图片
-    返回 str   -> 发送文字
-    返回 None  -> 不回复
-    """
-    msg = newMessage.strip()
-    logger.info(f"收到新消息: {msg}")
-
-    if "每日新闻" in msg:
-        logger.info(f"触发 每日新闻...")
-
-        logger.info(f"获取 每日新闻...")
-        img_data = ApiService.fetch_60s_news(cfg['api']['news_60s'])
-
-        logger.info(f"复制到剪贴板...")
-        img = comm_untils.bytes2Img(img_data)
-        comm_untils.copy2Clipboard(img)
-        return img
-
-    if "帮助" in msg:
-        logger.info(f"触发 帮助...")
-        return "指令列表：\n1. 每日新闻\n2. 帮助"
-
-    return None
 
 
 def start_robot():
