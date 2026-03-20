@@ -6,9 +6,13 @@ settings:
 
 # API 接口配置
 api:
-  news_60s:
+  daily_news:
     url: "60s.viki.moe"
     path: "/v2/60s?encoding=image"
+    method: "GET"
+  kfc_copywriting:
+    url: "60s.viki.moe"
+    path: "/v2/kfc"
     method: "GET"
 
 # 监听的好友列表

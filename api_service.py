@@ -1,12 +1,18 @@
 import http.client
+import json
 import re
+from typing import Dict, Optional
+from datetime import date as date_type
 
 
 class ApiService:
-    @staticmethod
-    def fetch_60s_news(config):
-        """根据配置获取 60s 新闻的原始 Bytes 数据"""
+    CONFIG: Dict[str, any] = None
+
+    @classmethod
+    def fetch_daily_news(cls) -> Optional[bytes]:
+        config = cls.CONFIG['api']['daily_news']
         conn = http.client.HTTPSConnection(config['url'])
+
         try:
             conn.request(config['method'], config['path'])
             res = conn.getresponse()
@@ -31,3 +37,31 @@ class ApiService:
             return None
         finally:
             conn.close()
+
+    """编码方式，支持 text/json/markdown"""
+    encoding: Optional[str]
+
+    @classmethod
+    def fetch_kfc_copywriting(cls) -> None:
+        config: dict[str, any] = cls.CONFIG['api']['kfc_copywriting']
+        conn = http.client.HTTPSConnection(config['url'])
+
+        try:
+            conn.request(config['method'], config['path'])
+            res = conn.getresponse()
+            raw_data = res.read().decode("utf-8")
+            return cls.__get_return_data(raw_data)['kfc']
+        except Exception as e:
+            print(f"API 请求失败: {e}")
+            return None
+        finally:
+            conn.close()
+
+    @classmethod
+    def __get_return_data(self, raw_data: str) -> str | Dict[str, any]:
+        data: Dict[str, any] = json.loads(raw_data)
+        if (data is None or data['code'] is None):
+            raise Exception("API 返回数据异常")
+        if (data['code'] != 200):
+            raise Exception(raw_data['message'])
+        return data['data']
