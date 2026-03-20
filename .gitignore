@@ -53,6 +53,7 @@ Thumbs.db
 ehthumbs.db
 
 # Logs
+logs/
 *.log
 
 # Git Clone Packages

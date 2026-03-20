@@ -9,6 +9,8 @@ with open("config.yaml", "r", encoding="utf-8") as f:
     cfg = yaml.safe_load(f)
     ApiService.CONFIG = cfg
 
+SUPPORTED_COMMANDS = ["帮助", "每日新闻", "KFC", "摸鱼日报", "冷笑话"]
+
 
 def smart_reply_logic(newMessage: str, contexts: list):
     """
@@ -18,27 +20,31 @@ def smart_reply_logic(newMessage: str, contexts: list):
     返回 None  -> 不回复
     """
 
-    if "帮助" == newMessage:
-        logger.info(f"触发 帮助...")
-        return "指令列表：\n1. 帮助\n2. 每日新闻\n3. KFC"
-    elif "每日新闻" == newMessage:
-        logger.info(f"触发 每日新闻...")
+    messages = newMessage.strip().split(" ")
+    if messages.__len__() < 2 or messages[0] != cfg['settings']['trigger'] or messages[1].upper() not in SUPPORTED_COMMANDS:
+        return None
+    else:
+        logger.info(f"触发 {newMessage} 指令")
 
+    reply = None
+    if "帮助" == messages[1]:
+        reply = "指令列表:\n"
+        for i, command in enumerate(SUPPORTED_COMMANDS, start=1):
+            reply += f"  巴拉 {i}. {command}\n"
+    elif "每日新闻" == messages[1]:
         img_data = ApiService.fetch_daily_news()
-        logger.info(f"获取 每日新闻...")
-
         reply = comm_untils.bytes2Img(img_data)
         comm_untils.copy2Clipboard(reply)
-        logger.info(f"复制到剪贴板...")
+    elif messages[1].upper() == "KFC":
+        reply = ApiService.fetch_crazy_kfc()
+    elif messages[1] == "摸鱼日报":
+        reply = ApiService.fetch_slacker_daily()
         return reply
-    elif newMessage.upper() == "KFC":
-        logger.info(f"触发 KFC文案...")
+    elif messages[1] == "冷笑话":
+        reply = ApiService.fetch_dad_joke()
 
-        reply = ApiService.fetch_kfc_copywriting()
-        logger.info(f"获取 KFC文案...")
-        return reply
-
-    return None
+    logger.info(f"回复消息：{reply}")
+    return reply
 
 
 def run_test():

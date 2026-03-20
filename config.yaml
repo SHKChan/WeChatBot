@@ -1,5 +1,6 @@
 # 机器人基础配置
 settings:
+  trigger: "巴拉"          # 机器人名称
   duration: "24h"        # 每一轮监听的时长
   loop_interval: 5        # 轮询间隔（秒）
   max_workers: 3          # 最大并发线程数
@@ -10,9 +11,17 @@ api:
     url: "60s.viki.moe"
     path: "/v2/60s?encoding=image"
     method: "GET"
-  kfc_copywriting:
+  crazy_kfc:
     url: "60s.viki.moe"
     path: "/v2/kfc"
+    method: "GET"
+  slacker_daily:
+    url: "60s.viki.moe"
+    path: "/v2/moyu?encoding=text"
+    method: "GET"
+  dad_joke:
+    url: "60s.viki.moe"
+    path: "/v2/dad-joke?encoding=text"
     method: "GET"
 
 # 监听的好友列表

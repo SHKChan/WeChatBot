@@ -42,8 +42,8 @@ class ApiService:
     encoding: Optional[str]
 
     @classmethod
-    def fetch_kfc_copywriting(cls) -> None:
-        config: dict[str, any] = cls.CONFIG['api']['kfc_copywriting']
+    def fetch_crazy_kfc(cls) -> None:
+        config: dict[str, any] = cls.CONFIG['api']['crazy_kfc']
         conn = http.client.HTTPSConnection(config['url'])
 
         try:
@@ -51,6 +51,38 @@ class ApiService:
             res = conn.getresponse()
             raw_data = res.read().decode("utf-8")
             return cls.__get_return_data(raw_data)['kfc']
+        except Exception as e:
+            print(f"API 请求失败: {e}")
+            return None
+        finally:
+            conn.close()
+
+    @classmethod
+    def fetch_slacker_daily(cls) -> None:
+        config: dict[str, any] = cls.CONFIG['api']['slacker_daily']
+        conn = http.client.HTTPSConnection(config['url'])
+
+        try:
+            conn.request(config['method'], config['path'])
+            res = conn.getresponse()
+            raw_data = res.read().decode("utf-8")
+            return raw_data
+        except Exception as e:
+            print(f"API 请求失败: {e}")
+            return None
+        finally:
+            conn.close()
+
+    @classmethod
+    def fetch_dad_joke(cls) -> None:
+        config: dict[str, any] = cls.CONFIG['api']['dad_joke']
+        conn = http.client.HTTPSConnection(config['url'])
+
+        try:
+            conn.request(config['method'], config['path'])
+            res = conn.getresponse()
+            raw_data = res.read().decode("utf-8")
+            return raw_data
         except Exception as e:
             print(f"API 请求失败: {e}")
             return None
