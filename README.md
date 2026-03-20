@@ -18,8 +18,12 @@
   ```
   python -m venv .venv
   .\.venv\Scripts\Activate.bat
+
   // Uninstall other packages
   pip freeze | ForEach-Object { pip uninstall -y $_ }
+
+  // Create requirements.txt for current project
+  pip freeze > requirements.txt
   ```
 - Install `pywecaht`
 
