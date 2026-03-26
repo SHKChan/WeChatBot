@@ -60,7 +60,7 @@ def smart_reply_logic(newMessage: str, contexts: Optional[List[Any]] = None) -> 
 
         elif cmd_text == "每日新闻":
             img_data: bytes = ApiService.fetch_daily_news()
-            # 将字节流转换为图片并存入剪贴板（具体实现参考 comm_untils）
+            # 将字节流转换为图片并存入剪贴板（具体实现参考 comm_utils）
             reply = comm_utils.bytes2Img(img_data)
             comm_utils.copy2Clipboard(reply)
             LOGGER.info(" logic [图片处理] >>> 新闻图片已转换并存入剪贴板")

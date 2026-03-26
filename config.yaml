@@ -11,7 +11,7 @@ settings:
 api:
   daily_news:
     url: "60s.viki.moe"
-    path: "/v2/60s?encoding=text"
+    path: "/v2/60s?encoding=image"
     method: "GET"
   crazy_kfc:
     url: "60s.viki.moe"

@@ -38,14 +38,12 @@ Copy pyweixin to repo root
 Modify to support image reply
 				# 支持回复图片
                                 if isinstance(reply_content, bytes):
-                                    input_edit.click_input()
-                                    pyautogui.hotkey('ctrl', 'v')
-                                else:
-                                    input_edit.set_text(reply_content)
-                                pyautogui.hotkey('alt', 's')
-                                if isinstance(reply_content, bytes):
-                                    input_edit.click_input()
-                                    pyautogui.hotkey('ctrl', 'v')
+    				    input_edit.click_input()
+    				    pyautogui.keyDown('ctrl')
+    				    time.sleep(0.1)
+    				    pyautogui.press('v')
+    				    time.sleep(0.1)
+    				    pyautogui.keyUp('ctrl')
                                 else:
                                     input_edit.set_text(reply_content)
                                 pyautogui.hotkey('alt', 's')
