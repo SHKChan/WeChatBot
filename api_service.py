@@ -16,7 +16,7 @@ class ApiService:
     CONFIG: Optional[RobotConfig] = None
 
     @classmethod
-    def fetch_daily_news(cls) -> Optional[bytes]:
+    def fetch_daily_news(cls) -> Optional[bytes | str]:
         """
         获取每日新闻图片。
         逻辑：先请求 HTML 页面，解析出真实的图片重定向链接，再下载图片。
@@ -31,6 +31,7 @@ class ApiService:
             with closing(http.client.HTTPSConnection(conf['url'], timeout=10)) as conn:
                 conn.request(conf['method'], conf['path'])
                 res = conn.getresponse()
+                return res
                 raw_html = res.read().decode("utf-8")
 
                 # 1. 尝试从返回的 HTML 中匹配图片重定向链接

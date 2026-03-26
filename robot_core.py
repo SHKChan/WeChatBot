@@ -31,8 +31,8 @@ def friend_worker_thread(friend_name: str, config: RobotConfig, stop_event: thre
                 friend=friend_name,
                 is_maximize=True
             )
-            # 留出 1.5s 让微信 UI 缓冲，防止搜索框状态冲突
-            time.sleep(1.5)
+            # 留出 0.5s 让微信 UI 缓冲，防止搜索框状态冲突
+            time.sleep(0.5)
 
         LOGGER.info(f" status [就绪] >>> 好友 [{friend_name}] 窗口已挂载，进入监听循环")
 
@@ -112,7 +112,7 @@ def start_robot() -> None:
             break
         except Exception as e:
             LOGGER.error(f" system [异常] >>> 主进程发生错误: {e}")
-            time.sleep(5)
+            time.sleep(config['settings']['loop_interval'])
 
 
 if __name__ == "__main__":
