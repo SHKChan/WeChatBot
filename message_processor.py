@@ -30,7 +30,7 @@ def smart_reply_logic(newMessage: str, contexts: list):
     if "帮助" == messages[1]:
         reply = "指令列表:\n"
         for i, command in enumerate(SUPPORTED_COMMANDS, start=1):
-            reply += f"  巴拉 {i}. {command}\n"
+            reply += f"  {i}.巴拉 {command}\n"
     elif "每日新闻" == messages[1]:
         img_data = ApiService.fetch_daily_news()
         reply = comm_untils.bytes2Img(img_data)

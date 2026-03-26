@@ -1,4 +1,3 @@
-
 ## Avaliable Approaches
 
 - RPA, Robotic Process Automation
@@ -19,15 +18,35 @@
   ```
   python -m venv .venv
   .\.venv\Scripts\Activate.bat
+
   // Uninstall other packages
   pip freeze | ForEach-Object { pip uninstall -y $_ }
+
+  // Create requirements.txt for current project
+  pip freeze > requirements.txt
   ```
 - Install `pywecaht`
 
 ```powershell
 git clone to Local
+
 cd to repo
 pip install -r requirements.txt
 pip install -e .
-copy pyweixin to repo root
+Copy pyweixin to repo root
+
+Modify to support image reply
+				# 支持回复图片
+                                if isinstance(reply_content, bytes):
+                                    input_edit.click_input()
+                                    pyautogui.hotkey('ctrl', 'v')
+                                else:
+                                    input_edit.set_text(reply_content)
+                                pyautogui.hotkey('alt', 's')
+                                if isinstance(reply_content, bytes):
+                                    input_edit.click_input()
+                                    pyautogui.hotkey('ctrl', 'v')
+                                else:
+                                    input_edit.set_text(reply_content)
+                                pyautogui.hotkey('alt', 's')
 ```
