@@ -1,9 +1,11 @@
+version: "0.2.0"
+
 # 机器人基础配置
 settings:
   trigger: "巴拉"          # 机器人名称
-  duration: "24h"        # 每一轮监听的时长
+  duration: "5min"        # 每一轮监听的时长
   loop_interval: 10        # 轮询间隔（秒）
-  max_workers: 3          # 最大并发线程数
+  max_workers: 5          # 最大并发线程数
 
 # API 接口配置
 api:
