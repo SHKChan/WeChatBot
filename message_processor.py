@@ -29,6 +29,8 @@ def smart_reply_logic(newMessage: str, contexts: Optional[List[Any]] = None) -> 
         ReplyContent: 返回字节流(图片)、字符串(文字) 或 None
     """
     global GLOBAL_CFG
+    GLOBAL_CFG = ConfigHelper.load_config()
+    ApiService.CONFIG = GLOBAL_CFG
     # 1. 基础校验与预处理
     clean_msg: str = newMessage.strip()
     parts: List[str] = clean_msg.split(" ")
@@ -90,13 +92,10 @@ def run_test() -> None:
     """
     逻辑模拟测试函数，带增强版日志显示。
     """
-    global GLOBAL_CFG
     LOGGER.info("================================================")
     LOGGER.info("   Robot Logic Simulator - 模拟测试模式开启       ")
     LOGGER.info("================================================")
     print("\n💡 输入示例: '巴拉 帮助' 或 '巴拉 KFC' (输入 'exit' 退出)")
-    GLOBAL_CFG = ConfigHelper.load_config()
-    ApiService.CONFIG = GLOBAL_CFG
 
     while True:
         try:
