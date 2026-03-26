@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "🤖 RPA Mode",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/robot_core.py",
+            "console": "integratedTerminal",
+            "purpose": ["debug-test"],
+            "env": {
+                "APP_MODE": "RPA"
+            }
+        },
+        {
+            "name": "🧪 Test Mode",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/message_processor.py",
+            "console": "integratedTerminal",
+            "purpose": ["debug-test"],
+            "env": {
+                "APP_MODE": "TEST"
+            }
+        }
+    ]
+}
